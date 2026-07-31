@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahmy & Mariam — Save the Date</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:wght@400;500&family=Archivo+Black&family=Inter:wght@500;600;700&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #f6f4f0;
+    --ink: #17140f;
+    --ink-soft: rgba(23,20,15,.55);
+    --line: rgba(23,20,15,.18);
+    --pill: #17140f;
+    --pill-text: #f6f4f0;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .page{
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 56px 28px 80px;
+    position: relative;
+  }
+
+  .eyebrow{
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: .35em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp .8s ease forwards;
+  }
+
+  .script{
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(24px, 6vw, 30px);
+    margin-top: 56px;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp .8s ease .15s forwards;
+  }
+
+  .names{
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(46px, 13vw, 68px);
+    line-height: 1.05;
+    margin-top: 14px;
+    letter-spacing: -.01em;
+    opacity: 0;
+    animation: fadeUp .9s ease .3s forwards;
+  }
+  .names .amp{
+    font-style: italic;
+    font-weight: 500;
+    padding: 0 6px;
+  }
+
+  .date-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 18px;
+    margin-top: 46px;
+    opacity: 0;
+    animation: fadeUp .8s ease .45s forwards;
+  }
+  .date-row .rule{
+    height: 1px;
+    width: 46px;
+    background: var(--line);
+  }
+  .date-row .date{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    letter-spacing: .3em;
+    color: var(--ink-soft);
+  }
+
+  .cta-wrap{
+    display:flex;
+    justify-content:center;
+    margin-top: 40px;
+    opacity: 0;
+    animation: fadeUp .8s ease .6s forwards;
+  }
+  .cta{
+    appearance:none;
+    border:none;
+    cursor:pointer;
+    background: var(--pill);
+    color: var(--pill-text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    letter-spacing: .02em;
+    padding: 17px 34px;
+    border-radius: 999px;
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    transition: transform .25s ease, box-shadow .25s ease;
+    box-shadow: 0 8px 24px rgba(23,20,15,.18);
+  }
+  .cta:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(23,20,15,.24); }
+  .cta svg{ width:16px; height:16px; transition: transform .25s ease; }
+  .cta:hover svg{ transform: translateX(4px); }
+
+  .photos{
+    position: relative;
+    margin-top: 72px;
+    height: 340px;
+    opacity: 0;
+    animation: fadeUp .9s ease .78s forwards;
+  }
+  .photo{
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    border-radius: 28px;
+    box-shadow: 0 20px 40px rgba(23,20,15,.16);
+    transition: transform .4s ease, box-shadow .4s ease;
+  }
+  .photo-1{
+    left: 0;
+    bottom: 0;
+    width: 42%;
+    height: 78%;
+    z-index: 1;
+    transform: rotate(-6deg);
+  }
+  .photo-1:hover{
+    transform: rotate(-6deg) scale(1.05);
+    box-shadow: 0 24px 48px rgba(23,20,15,.22);
+  }
+  .photo-2{
+    right: 0;
+    top: 0;
+    width: 56%;
+    height: 100%;
+    z-index: 2;
+    transform: rotate(4deg);
+  }
+  .photo-2:hover{
+    transform: rotate(4deg) scale(1.05);
+    box-shadow: 0 24px 48px rgba(23,20,15,.22);
+  }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(14px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .eyebrow,.script,.names,.date-row,.cta-wrap,.photos{
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  .cta:focus-visible{
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  /* ===== second section: SAVE the DATE illustration ===== */
+  .std{
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 90px 32px 100px;
+    text-align: center;
+  }
+
+  .std-head{
+    font-family: 'Archivo Black', sans-serif;
+    line-height: .92;
+    color: var(--ink);
+  }
+  .std-head .l1{
+    font-size: clamp(44px, 12vw, 60px);
+    letter-spacing: .22em;
+    padding-inline-start: .22em;
+    display:block;
+  }
+  .std-head .l2{
+    font-size: clamp(50px, 15vw, 72px);
+    letter-spacing: 0;
+    display:block;
+    margin-top: 6px;
+  }
+  .std-head .l2 .the{
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: .38em;
+    margin-right: 6px;
+    vertical-align: 6%;
+  }
+
+  .std-illustration{
+    width: 78%;
+    max-width: 300px;
+    margin: 52px auto 44px;
+    display: block;
+  }
+
+  .std-photo{
+    width: 78%;
+    max-width: 300px;
+    aspect-ratio: 3 / 3.6;
+    margin: 52px auto 44px;
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    background: #ece8e0;
+  }
+  .std-photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s ease;
+  }
+  .std-photo:hover img{
+    transform: scale(1.06);
+  }
+
+  .std-rule{
+    height: 1px;
+    width: 88%;
+    max-width: 320px;
+    background: var(--ink);
+    margin: 0 auto;
+  }
+
+  .std-names{
+    margin-top: 30px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: .28em;
+    color: var(--ink);
+  }
+
+  .std-date{
+    margin-top: 12px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: .35em;
+    color: var(--ink-soft);
+  }
+
+  /* ===== third section: venue / dark background ===== */
+  .venue{
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #111;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+  }
+  .venue::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,.82) 100%);
+  }
+  .venue-inner{
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 32px 56px;
+    color: #f6f4f0;
+  }
+
+  .venue-head{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(34px, 9vw, 46px);
+    line-height: 1.12;
+    margin-bottom: 42px;
+  }
+  .venue-head em{
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .venue-row{
+    margin-bottom: 22px;
+    padding: 4px 0;
+    border-radius: 6px;
+    transition: padding-inline-start .25s ease;
+  }
+  .venue-row:hover{
+    padding-inline-start: 8px;
+  }
+  .venue-label{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: rgba(246,244,240,.5);
+    display: block;
+    margin-bottom: 6px;
+    transition: color .25s ease;
+  }
+  .venue-row:hover .venue-label{
+    color: rgba(246,244,240,.8);
+  }
+  .venue-value{
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  .venue-cta{
+    margin-top: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(246,244,240,.14);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(246,244,240,.35);
+    color: #f6f4f0;
+    text-decoration: none;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    padding: 16px 26px;
+    border-radius: 999px;
+    transition: background .25s ease;
+  }
+  .venue-cta:hover{ background: rgba(246,244,240,.24); }
+  .venue-cta svg{ width: 14px; height: 14px; }
+
+  /* ===== fourth section: countdown ===== */
+  .cd{
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 100px 32px 110px;
+    text-align: center;
+  }
+  .cd-eyebrow{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .cd-head{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 7vw, 36px);
+    margin-bottom: 54px;
+  }
+  .cd-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .cd-unit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 6px;
+    border-radius: 10px;
+    transition: background .25s ease, transform .25s ease;
+  }
+  .cd-unit:hover{
+    background: rgba(23,20,15,.04);
+    transform: translateY(-2px);
+  }
+  .cd-num{
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(34px, 9vw, 50px);
+    line-height: 1;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-label{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .cd-sep{
+    align-self: flex-start;
+    margin-top: 4px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 7vw, 40px);
+    color: var(--line);
+  }
+  @media (max-width: 380px){
+    .cd-grid{ gap: 6px; }
+  }
+
+  /* ===== fifth section: moments grid ===== */
+  .mf{
+    background: #0d0d0d;
+    padding: 96px 32px 100px;
+  }
+  .mf-inner{
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .mf-head{
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(38px, 10vw, 52px);
+    line-height: 1.06;
+    color: #f6f4f0;
+  }
+  .mf-sub{
+    margin-top: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(246,244,240,.55);
+    max-width: 340px;
+  }
+  .mf-grid{
+    margin-top: 52px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .mf-photo{
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #1c1c1c;
+  }
+  .mf-photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s ease;
+  }
+  .mf-photo:hover img{
+    transform: scale(1.06);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .mf-photo img{ transition: none; }
+  }
+
+  /* ===== sixth section: guest messages ===== */
+  .msg{
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 100px 32px 110px;
+  }
+  .msg-eyebrow{
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .msg-head{
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(30px, 8vw, 40px);
+  }
+  .msg-sub{
+    text-align: center;
+    margin-top: 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    color: var(--ink-soft);
+  }
+
+  .msg-form{
+    margin-top: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .msg-field{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .msg-field label{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .msg-field input,
+  .msg-field textarea{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid var(--line);
+    padding: 10px 2px;
+    outline: none;
+    resize: none;
+    transition: border-color .2s ease;
+  }
+  .msg-field input:hover,
+  .msg-field textarea:hover{
+    border-color: rgba(23,20,15,.4);
+  }
+  .msg-field input:focus,
+  .msg-field textarea:focus{
+    border-color: var(--ink);
+  }
+  .msg-field textarea{ min-height: 80px; }
+
+  .msg-submit{
+    margin-top: 10px;
+    align-self: center;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    background: var(--pill);
+    color: var(--pill-text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    padding: 15px 32px;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(23,20,15,.18);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .msg-submit:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(23,20,15,.24); }
+  .msg-submit:focus-visible{ outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  .msg-note{
+    text-align: center;
+    margin-top: 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: var(--ink-soft);
+    min-height: 20px;
+  }
+
+  .msg-list{
+    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .msg-card{
+    border-top: 1px solid var(--line);
+    padding: 18px 10px 18px 0;
+    margin: 0 -10px;
+    border-radius: 6px;
+    transition: background .25s ease, padding-inline-start .25s ease;
+  }
+  .msg-card:hover{
+    background: rgba(23,20,15,.035);
+    padding-inline-start: 10px;
+  }
+  .msg-card-name{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+  }
+  .msg-card-text{
+    margin-top: 6px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .msg-empty{
+    text-align: center;
+    margin-top: 56px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-soft);
+  }
+
+  /* ===== footer ===== */
+  .ftr{
+    background: #111;
+    color: #f6f4f0;
+    padding: 80px 32px 40px;
+    text-align: center;
+  }
+  .ftr-line{
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(20px, 5.5vw, 26px);
+    max-width: 380px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+  .ftr-rule{
+    width: 40px;
+    height: 1px;
+    background: rgba(246,244,240,.3);
+    margin: 32px auto;
+  }
+  .ftr-title{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: letter-spacing .3s ease;
+  }
+  .ftr-title:hover{
+    letter-spacing: .4em;
+  }
+  .ftr-date{
+    margin-top: 10px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    letter-spacing: .2em;
+    color: rgba(246,244,240,.55);
+  }
+  .ftr-bottom{
+    margin-top: 56px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: .05em;
+    color: rgba(246,244,240,.35);
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="eyebrow">R &amp; M · 2026</div>
+
+  <div class="script">we&rsquo;re getting married</div>
+
+  <h1 class="names">Rahmy <span class="amp">&amp;</span><br>Mariam</h1>
+
+  <div class="date-row">
+    <span class="rule"></span>
+    <span class="date">05 . 10 . 2026</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="cta-wrap">
+    <button class="cta" type="button" onclick="downloadICS()">
+      Save the Date
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    function downloadICS(){
+      const start = '20261005T180000';
+      const end   = '20261005T230000';
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'BEGIN:VEVENT',
+        'SUMMARY:Rahmy & Mariam\'s Wedding',
+        'LOCATION:The Roman Hall, Maryland',
+        'DESCRIPTION:We can\'t wait to celebrate with you.',
+        'DTSTART:' + start,
+        'DTEND:' + end,
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([ics], { type: 'text/calendar' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'rahmy-mariam-wedding.ics';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+
+  <div class="photos">
+    <div class="photo photo-1" style="background-image:url('');"></div>
+    <div class="photo photo-2" style="background-image:url('');"></div>
+  </div>
+
+</div>
+
+<!-- ===== second section ===== -->
+<section class="std">
+
+  <h2 class="std-head">
+    <span class="l1">SAVE</span>
+    <span class="l2"><span class="the">the</span>DATE!</span>
+  </h2>
+
+  <!--
+    ضيف صورتك هنا: غيّر الـ src بس بلينك الصورة، أو بمسار الملف لو رافعه جنب الصفحة
+    مثال: src="my-photo.jpg"  أو  src="https://example.com/photo.jpg"
+  -->
+  <div class="std-photo">
+    <img src="4.jpeg" alt="Rahmy & Mariam">
+  </div>
+
+  <div class="std-rule"></div>
+
+  <div class="std-names">RAHMY + MARIAM</div>
+  <div class="std-date">05 . 10 . 2026</div>
+
+</section>
+
+
+<section class="venue" style="background-image:url('3.jpeg')">
+  <div class="venue-inner">
+
+
+    <div class="venue-row">
+      <span class="venue-label">Venue</span>
+      <span class="venue-value">The Roman Hall, Maryland</span>
+    </div>
+
+    <div class="venue-row">
+      <span class="venue-label">When</span>
+      <span class="venue-value">05 Oct 2026 · 9pm</span>
+    </div>
+
+    <a class="venue-cta" href="https://www.google.com/maps/search/?api=1&query=The+Roman+Hall+Maryland" target="_blank" rel="noopener">
+      Open in Maps
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17L17 7"/><path d="M7 7h10v10"/>
+      </svg>
+    </a>
+
+  </div>
+</section>
+
+<!-- ===== fourth section: countdown ===== -->
+<section class="cd">
+
+  <div class="cd-eyebrow">Counting down</div>
+  <h2 class="cd-head">Until Rahmy &amp; Mariam say &ldquo;I do&rdquo;</h2>
+
+  <div class="cd-grid">
+    <div class="cd-unit">
+      <span class="cd-num" id="cdDays">00</span>
+      <span class="cd-label">Days</span>
+    </div>
+    <div class="cd-unit">
+      <span class="cd-num" id="cdHours">00</span>
+      <span class="cd-label">Hours</span>
+    </div>
+    <div class="cd-unit">
+      <span class="cd-num" id="cdMinutes">00</span>
+      <span class="cd-label">Minutes</span>
+    </div>
+    <div class="cd-unit">
+      <span class="cd-num" id="cdSeconds">00</span>
+      <span class="cd-label">Seconds</span>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  // غيّر التاريخ والوقت هنا لو اتغيّر الميعاد
+  const weddingDate = new Date('2026-10-05T18:00:00');
+
+  function updateCountdown(){
+    const now = new Date();
+    let diff = weddingDate - now;
+
+    if(diff <= 0){
+      document.getElementById('cdDays').textContent = '00';
+      document.getElementById('cdHours').textContent = '00';
+      document.getElementById('cdMinutes').textContent = '00';
+      document.getElementById('cdSeconds').textContent = '00';
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('cdDays').textContent = String(days).padStart(2, '0');
+    document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cdMinutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('cdSeconds').textContent = String(seconds).padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+<!-- ===== fifth section: moments grid ===== -->
+<!--
+  ضيف صورك هنا: غيّر الـ src في كل صورة من الأربعة تحت
+  مثال: src="photo1.jpg" أو src="https://example.com/photo1.jpg"
+-->
+<section class="mf">
+  <div class="mf-inner">
+
+    <h2 class="mf-head">Moments,<br>Framed.</h2>
+    <p class="mf-sub">A love letter, in fragments. Tap, hover, linger.</p>
+
+    <div class="mf-grid">
+      <div class="mf-photo"><img src="PUT-PHOTO-1-LINK-OR-PATH-HERE.jpg" alt=""></div>
+      <div class="mf-photo"><img src="PUT-PHOTO-2-LINK-OR-PATH-HERE.jpg" alt=""></div>
+      <div class="mf-photo"><img src="PUT-PHOTO-3-LINK-OR-PATH-HERE.jpg" alt=""></div>
+      <div class="mf-photo"><img src="PUT-PHOTO-4-LINK-OR-PATH-HERE.jpg" alt=""></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== sixth section: guest messages ===== -->
+<section class="msg">
+
+  <div class="msg-eyebrow">For the couple</div>
+  <h2 class="msg-head">Leave a Note</h2>
+  <p class="msg-sub">Write a word, a wish, a memory — for Rahmy &amp; Mariam.</p>
+
+  <form class="msg-form" id="msgForm">
+    <div class="msg-field">
+      <label for="msgName">Your name</label>
+      <input type="text" id="msgName" required>
+    </div>
+    <div class="msg-field">
+      <label for="msgText">Your message</label>
+      <textarea id="msgText" required></textarea>
+    </div>
+    <button class="msg-submit" type="submit">Send</button>
+    <div class="msg-note" id="msgStatus"></div>
+  </form>
+
+  <div class="msg-list" id="msgList"></div>
+
+</section>
+
+<script>
+  const MSG_KEY = 'wedding_guest_messages';
+
+  function loadMessages(){
+    try{
+      return JSON.parse(localStorage.getItem(MSG_KEY)) || [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function saveMessages(list){
+    localStorage.setItem(MSG_KEY, JSON.stringify(list));
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function renderMessages(){
+    const list = loadMessages();
+    const container = document.getElementById('msgList');
+
+    if(list.length === 0){
+      container.innerHTML = '<div class="msg-empty">Be the first to leave a note.</div>';
+      return;
+    }
+
+    container.innerHTML = list
+      .slice()
+      .reverse()
+      .map(m => `
+        <div class="msg-card">
+          <div class="msg-card-name">${escapeHtml(m.name)}</div>
+          <div class="msg-card-text">${escapeHtml(m.text)}</div>
+        </div>
+      `).join('');
+  }
+
+  document.getElementById('msgForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('msgName').value.trim();
+    const text = document.getElementById('msgText').value.trim();
+    if(!name || !text) return;
+
+    const list = loadMessages();
+    list.push({ name, text, ts: Date.now() });
+    saveMessages(list);
+
+    document.getElementById('msgName').value = '';
+    document.getElementById('msgText').value = '';
+
+    const status = document.getElementById('msgStatus');
+    status.textContent = 'Thank you — your note has been saved.';
+    setTimeout(() => { status.textContent = ''; }, 3000);
+
+    renderMessages();
+  });
+
+  renderMessages();
+</script>
+
+<!-- ===== footer ===== -->
+<footer class="ftr">
+  <p class="ftr-line">We can&rsquo;t wait to celebrate this new chapter with you.</p>
+
+  <div class="ftr-rule"></div>
+
+  <div class="ftr-title">Rahmy &amp; Mariam</div>
+  <div class="ftr-date">05 . 10 . 2026 &middot; The Roman Hall, Maryland</div>
+
+  <div class="ftr-bottom">With love, always.</div>
+</footer>
+
+</body>
+</html>
