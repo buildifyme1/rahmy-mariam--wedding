@@ -273,42 +273,6 @@
     box-shadow: 0 24px 48px rgba(23,20,15,.22);
   }
 
-  .card-download{
-    position: absolute;
-    top: 28px;
-    left: 20px;
-    z-index: 5;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    appearance: none;
-    cursor: pointer;
-    background: rgba(23,20,15,.06);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(23,20,15,.14);
-    box-shadow: 0 8px 18px rgba(23,20,15,.1);
-    color: var(--ink);
-    opacity: 0;
-    animation: fadeUp .8s ease .1s forwards;
-    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
-  }
-  .card-download svg{
-    width: 17px;
-    height: 17px;
-  }
-  .card-download:hover{
-    transform: translateY(-2px) scale(1.06);
-    box-shadow: 0 12px 24px rgba(23,20,15,.16);
-    background: rgba(23,20,15,.1);
-  }
-  .card-download:focus-visible{
-    outline: 2px solid var(--ink);
-    outline-offset: 3px;
-  }
-
   @keyframes fadeUp{
     from{ opacity:0; transform: translateY(14px); }
     to{ opacity:1; transform: translateY(0); }
@@ -611,12 +575,17 @@
   }
   .mf-grid{
     margin-top: 52px;
-    columns: 2;
-    column-gap: 14px;
+    display: flex;
+    gap: 14px;
+  }
+  .mf-col{
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
   .mf-photo{
-    break-inside: avoid;
-    margin-bottom: 14px;
     border-radius: 18px;
     overflow: hidden;
     background: #1c1c1c;
@@ -863,8 +832,9 @@
     .cd-grid{ gap: 8px; }
 
     .mf-sub{ max-width: none; }
-    .mf-grid{ column-gap: 10px; }
-    .mf-photo{ margin-bottom: 10px; border-radius: 14px; }
+    .mf-grid{ gap: 10px; }
+    .mf-col{ gap: 10px; }
+    .mf-photo{ border-radius: 14px; }
 
     .msg-eyebrow{ letter-spacing: .22em; }
     .msg-field label{ letter-spacing: .14em; }
@@ -909,14 +879,6 @@
 
 <div class="page">
 
-  <button class="card-download" type="button" onclick="downloadCard()" aria-label="Download Invitation Card" title="Download Invitation Card">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 3v12"/>
-      <path d="M7 10l5 5 5-5"/>
-      <path d="M5 21h14"/>
-    </svg>
-  </button>
-
   <div class="eyebrow">R &amp; M · 2026</div>
 
   <div class="script">we&rsquo;re getting married</div>
@@ -939,9 +901,6 @@
   </div>
 
   <script>
-    // حط اسم ملف الصورة اللي هتضيفها هنا (لازم يكون في نفس فولدر الصفحة)
-    const SAVE_THE_DATE_IMAGE = 'save-the-date.jpg';
-
     // زرار "Save the Date": بيحفظ الميعاد في التقويم بشكل عادي (ملف .ics)
     function downloadICS(){
       const dtStart = '20261005T210000';
@@ -976,15 +935,6 @@
       URL.revokeObjectURL(url);
     }
 
-    // أيقونة التحميل فوق الصور: بتنزل كارت الدعوة (الصورة) نفسه
-    function downloadCard(){
-      const link = document.createElement('a');
-      link.href = SAVE_THE_DATE_IMAGE;
-      link.download = 'Rahmy-Mariam-Save-the-Date.jpg';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
   </script>
 
   <div class="photos">
@@ -1108,10 +1058,14 @@
     <p class="mf-sub">A love letter, in fragments. Tap, hover, linger.</p>
 
     <div class="mf-grid">
-      <div class="mf-photo"><img src="rahmy.jpeg" alt=""></div>
-      <div class="mf-photo"><img src="rahmy2.jpeg" alt=""></div>
-      <div class="mf-photo"><img src="rahmy3.jpeg" alt=""></div>
-      <div class="mf-photo"><img src="rahmy5.jpeg" alt=""></div>
+      <div class="mf-col">
+        <div class="mf-photo"><img src="rahmy.jpeg" alt=""></div>
+        <div class="mf-photo"><img src="rahmy3.jpeg" alt=""></div>
+      </div>
+      <div class="mf-col">
+        <div class="mf-photo"><img src="rahmy2.jpeg" alt=""></div>
+        <div class="mf-photo"><img src="rahmy5.jpeg" alt=""></div>
+      </div>
     </div>
 
   </div>
