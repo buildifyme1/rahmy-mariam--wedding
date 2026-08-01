@@ -7,7 +7,7 @@
 <title>Rahmy & Mariam — Save the Date</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -24,10 +24,98 @@
   body{
     background: var(--bg);
     color: var(--ink);
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+  }
+  body.is-loading{
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  /* ===== loading screen ===== */
+  .loader{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    background: var(--bg);
+    transition: opacity .7s ease, visibility .7s ease;
+  }
+  .loader.is-hidden{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .loader-monogram{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(46px, 13vw, 68px);
+    color: var(--ink);
+    line-height: 1;
+  }
+  .loader-letter{
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: loaderIn .7s ease forwards;
+  }
+  .loader-letter.l1{ animation-delay: .15s; }
+  .loader-letter.l2{ animation-delay: .55s; }
+  .loader-amp{
+    display: inline-block;
+    font-size: .42em;
+    color: var(--ink-soft);
+    opacity: 0;
+    transform: translateY(12px);
+    animation: loaderIn .7s ease .35s forwards;
+  }
+  .loader-caption{
+    font-size: 11px;
+    letter-spacing: .38em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0;
+    animation: loaderIn .7s ease .8s forwards;
+  }
+  .loader-bar{
+    width: 130px;
+    height: 1px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: loaderIn .5s ease .8s forwards;
+  }
+  .loader-bar-fill{
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: loaderBar 1.2s cubic-bezier(.4,0,.2,1) 1s forwards;
+  }
+  @keyframes loaderIn{
+    to{ opacity: 1; transform: translateY(0); }
+  }
+  @keyframes loaderBar{
+    to{ transform: scaleX(1); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .loader-letter,.loader-amp,.loader-caption,.loader-bar,.loader-bar-fill{
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 
   .page{
@@ -51,33 +139,45 @@
 
   .script{
     text-align: center;
-    font-family: 'Alegreya', serif;
-    font-style: italic;
-    font-style: italic;
-    font-weight: 500;
-    font-size: clamp(24px, 6vw, 30px);
-    margin-top: 36px;
+    font-family: 'Tangerine', cursive;
+    font-weight: 700;
+    font-size: clamp(32px, 9vw, 42px);
+    margin-top: 40px;
     color: var(--ink);
     opacity: 0;
     animation: fadeUp .8s ease .15s forwards;
   }
 
   .names{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    font-family: 'Alegreya', serif;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 700;
     font-size: clamp(46px, 13vw, 68px);
     line-height: 1.05;
-    margin-top: 14px;
+    margin-top: 18px;
     letter-spacing: -.01em;
     opacity: 0;
     animation: fadeUp .9s ease .3s forwards;
   }
   .names .amp{
+    display: block;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 500;
-    padding: 0 6px;
+    font-size: .4em;
+    line-height: 1;
+    color: var(--ink);
+    margin: 8px 0;
+  }
+  .names .name-1{
+    transform: none;
+  }
+  .names .name-2{
+    transform: none;
   }
 
   .date-row{
@@ -85,7 +185,7 @@
     align-items:center;
     justify-content:center;
     gap: 12px;
-    margin-top: 28px;
+    margin-top: 36px;
     opacity: 0;
     animation: fadeUp .8s ease .45s forwards;
   }
@@ -96,7 +196,7 @@
     background: var(--line);
   }
   .date-row .date{
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: clamp(15px, 4.4vw, 20px);
     letter-spacing: .16em;
@@ -107,7 +207,7 @@
   .cta-wrap{
     display:flex;
     justify-content:center;
-    margin-top: 26px;
+    margin-top: 32px;
     opacity: 0;
     animation: fadeUp .8s ease .6s forwards;
   }
@@ -117,7 +217,7 @@
     cursor:pointer;
     background: var(--pill);
     color: var(--pill-text);
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 19px;
     letter-spacing: .02em;
@@ -173,6 +273,42 @@
     box-shadow: 0 24px 48px rgba(23,20,15,.22);
   }
 
+  .card-download{
+    position: absolute;
+    top: 28px;
+    left: 20px;
+    z-index: 5;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    appearance: none;
+    cursor: pointer;
+    background: rgba(23,20,15,.06);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(23,20,15,.14);
+    box-shadow: 0 8px 18px rgba(23,20,15,.1);
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp .8s ease .1s forwards;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .card-download svg{
+    width: 17px;
+    height: 17px;
+  }
+  .card-download:hover{
+    transform: translateY(-2px) scale(1.06);
+    box-shadow: 0 12px 24px rgba(23,20,15,.16);
+    background: rgba(23,20,15,.1);
+  }
+  .card-download:focus-visible{
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+  }
+
   @keyframes fadeUp{
     from{ opacity:0; transform: translateY(14px); }
     to{ opacity:1; transform: translateY(0); }
@@ -200,8 +336,9 @@
   }
 
   .std-head{
-    font-family: 'Alegreya', serif;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
+    font-weight: 700;
     line-height: .92;
     color: var(--ink);
   }
@@ -218,7 +355,7 @@
     margin-top: 6px;
   }
   .std-head .l2 .the{
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-style: italic;
     font-weight: 500;
@@ -264,7 +401,7 @@
 
   .std-names{
     margin-top: 30px;
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 700;
     font-size: 20px;
@@ -274,7 +411,7 @@
 
   .std-date{
     margin-top: 12px;
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 500;
     font-size: 16px;
@@ -311,7 +448,7 @@
   }
 
   .venue-head{
-    font-family: 'Alegreya', serif;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 600;
     font-size: clamp(34px, 9vw, 46px);
@@ -333,7 +470,7 @@
     padding-inline-start: 8px;
   }
   .venue-label{
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 12px;
     letter-spacing: .3em;
@@ -347,7 +484,7 @@
     color: rgba(246,244,240,.8);
   }
   .venue-value{
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 500;
     font-size: 22px;
@@ -363,7 +500,7 @@
     border: 1px solid rgba(246,244,240,.35);
     color: #f6f4f0;
     text-decoration: none;
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 13px;
     letter-spacing: .25em;
@@ -383,7 +520,7 @@
     text-align: center;
   }
   .cd-eyebrow{
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 12px;
     letter-spacing: .35em;
@@ -392,7 +529,7 @@
     margin-bottom: 18px;
   }
   .cd-head{
-    font-family: 'Alegreya', serif;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 600;
     font-size: clamp(28px, 7vw, 36px);
@@ -417,7 +554,7 @@
     transform: translateY(-2px);
   }
   .cd-num{
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 700;
     font-size: clamp(34px, 9vw, 50px);
@@ -426,7 +563,7 @@
     font-variant-numeric: tabular-nums;
   }
   .cd-label{
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 11px;
     letter-spacing: .2em;
@@ -436,7 +573,7 @@
   .cd-sep{
     align-self: flex-start;
     margin-top: 4px;
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: clamp(28px, 7vw, 40px);
     color: var(--line);
@@ -455,7 +592,7 @@
     margin: 0 auto;
   }
   .mf-head{
-    font-family: 'Alegreya', serif;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 700;
     font-size: clamp(38px, 10vw, 52px);
@@ -464,7 +601,7 @@
   }
   .mf-sub{
     margin-top: 20px;
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 400;
     font-size: 16px;
@@ -474,27 +611,35 @@
   }
   .mf-grid{
     margin-top: 52px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    columns: 2;
+    column-gap: 14px;
   }
   .mf-photo{
-    aspect-ratio: 1 / 1;
-    border-radius: 16px;
+    break-inside: avoid;
+    margin-bottom: 14px;
+    border-radius: 18px;
     overflow: hidden;
     background: #1c1c1c;
+    border: 1px solid rgba(246,244,240,.08);
+    box-shadow: 0 14px 30px rgba(0,0,0,.4);
+    transition: transform .4s ease, box-shadow .4s ease, border-color .4s ease;
+  }
+  .mf-photo:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,.5);
+    border-color: rgba(246,244,240,.2);
   }
   .mf-photo img{
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
-    transition: transform .5s ease;
+    transition: transform .6s ease;
   }
   .mf-photo:hover img{
-    transform: scale(1.06);
+    transform: scale(1.05);
   }
   @media (prefers-reduced-motion: reduce){
+    .mf-photo,
     .mf-photo img{ transition: none; }
   }
 
@@ -506,7 +651,7 @@
   }
   .msg-eyebrow{
     text-align: center;
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 12px;
     letter-spacing: .35em;
@@ -516,7 +661,7 @@
   }
   .msg-head{
     text-align: center;
-    font-family: 'Alegreya', serif;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 600;
     font-size: clamp(30px, 8vw, 40px);
@@ -524,7 +669,7 @@
   .msg-sub{
     text-align: center;
     margin-top: 14px;
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 19px;
     color: var(--ink-soft);
@@ -542,7 +687,7 @@
     gap: 8px;
   }
   .msg-field label{
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 11px;
     letter-spacing: .2em;
@@ -551,7 +696,7 @@
   }
   .msg-field input,
   .msg-field textarea{
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 19px;
     color: var(--ink);
@@ -581,7 +726,7 @@
     cursor: pointer;
     background: var(--pill);
     color: var(--pill-text);
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 18px;
     padding: 15px 32px;
@@ -595,7 +740,7 @@
   .msg-note{
     text-align: center;
     margin-top: 12px;
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 15px;
     color: var(--ink-soft);
@@ -620,7 +765,7 @@
     padding-inline-start: 10px;
   }
   .msg-card-name{
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 600;
     font-size: 18px;
@@ -628,7 +773,7 @@
   }
   .msg-card-text{
     margin-top: 6px;
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 18px;
     line-height: 1.5;
@@ -637,7 +782,7 @@
   .msg-empty{
     text-align: center;
     margin-top: 56px;
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-style: italic;
     font-size: 17px;
@@ -652,8 +797,7 @@
     text-align: center;
   }
   .ftr-line{
-    font-family: 'Alegreya', serif;
-    font-style: italic;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 500;
     font-size: clamp(20px, 5.5vw, 26px);
@@ -668,7 +812,7 @@
     margin: 32px auto;
   }
   .ftr-title{
-    font-family: 'Alegreya', serif;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 700;
     font-size: 15px;
@@ -682,7 +826,7 @@
   }
   .ftr-date{
     margin-top: 10px;
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 13px;
     letter-spacing: .2em;
@@ -690,7 +834,7 @@
   }
   .ftr-bottom{
     margin-top: 56px;
-    font-family: 'Alegreya', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 12px;
     letter-spacing: .05em;
@@ -719,7 +863,8 @@
     .cd-grid{ gap: 8px; }
 
     .mf-sub{ max-width: none; }
-    .mf-grid{ gap: 10px; }
+    .mf-grid{ column-gap: 10px; }
+    .mf-photo{ margin-bottom: 10px; border-radius: 14px; }
 
     .msg-eyebrow{ letter-spacing: .22em; }
     .msg-field label{ letter-spacing: .14em; }
@@ -737,15 +882,46 @@
   }
 </style>
 </head>
-<body>
+<body class="is-loading">
+
+<div class="loader" id="loader">
+  <div class="loader-monogram">
+    <span class="loader-letter l1">R</span>
+    <span class="loader-amp">&amp;</span>
+    <span class="loader-letter l2">M</span>
+  </div>
+  <div class="loader-caption">Rahmy &amp; Mariam</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<script>
+  window.addEventListener('load', function(){
+    var loader = document.getElementById('loader');
+    var minDelay = 2100;
+    setTimeout(function(){
+      document.body.classList.remove('is-loading');
+      loader.classList.add('is-hidden');
+      setTimeout(function(){ loader.remove(); }, 750);
+    }, minDelay);
+  });
+</script>
+
 
 <div class="page">
+
+  <button class="card-download" type="button" onclick="downloadCard()" aria-label="Download Invitation Card" title="Download Invitation Card">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3v12"/>
+      <path d="M7 10l5 5 5-5"/>
+      <path d="M5 21h14"/>
+    </svg>
+  </button>
 
   <div class="eyebrow">R &amp; M · 2026</div>
 
   <div class="script">we&rsquo;re getting married</div>
 
-  <h1 class="names">Rahmy <span class="amp">&amp;</span><br>Mariam</h1>
+  <h1 class="names"><span class="name name-1">Rahmy</span><span class="amp">&amp;</span><span class="name name-2">Mariam</span></h1>
 
   <div class="date-row">
     <span class="rule"></span>
@@ -766,7 +942,42 @@
     // حط اسم ملف الصورة اللي هتضيفها هنا (لازم يكون في نفس فولدر الصفحة)
     const SAVE_THE_DATE_IMAGE = 'save-the-date.jpg';
 
+    // زرار "Save the Date": بيحفظ الميعاد في التقويم بشكل عادي (ملف .ics)
     function downloadICS(){
+      const dtStart = '20261005T210000';
+      const dtEnd   = '20261006T010000';
+      const dtStamp = new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+
+      const icsLines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Rahmy and Mariam Wedding//EN',
+        'CALSCALE:GREGORIAN',
+        'BEGIN:VEVENT',
+        'UID:' + Date.now() + '@rahmy-mariam-wedding',
+        'DTSTAMP:' + dtStamp,
+        'DTSTART:' + dtStart,
+        'DTEND:' + dtEnd,
+        'SUMMARY:Rahmy & Mariam\'s Wedding',
+        'LOCATION:The Roman Hall\\, Maryland',
+        'DESCRIPTION:Join us as we celebrate our wedding day.',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ];
+
+      const blob = new Blob([icsLines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Rahmy-Mariam-Wedding.ics';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    // أيقونة التحميل فوق الصور: بتنزل كارت الدعوة (الصورة) نفسه
+    function downloadCard(){
       const link = document.createElement('a');
       link.href = SAVE_THE_DATE_IMAGE;
       link.download = 'Rahmy-Mariam-Save-the-Date.jpg';
@@ -777,8 +988,8 @@
   </script>
 
   <div class="photos">
-    <div class="photo photo-1" style="background-image:url('rahmy2.jpeg');"></div>
-    <div class="photo photo-2" style="background-image:url('rahmy.jpeg');"></div>
+    <div class="photo photo-1" style="background-image:url('hero.jpeg');"></div>
+    <div class="photo photo-2" style="background-image:url('hero2.jpeg');"></div>
   </div>
 
 </div>
@@ -897,10 +1108,10 @@
     <p class="mf-sub">A love letter, in fragments. Tap, hover, linger.</p>
 
     <div class="mf-grid">
-      <div class="mf-photo"><img src="PUT-PHOTO-1-LINK-OR-PATH-HERE.jpg" alt=""></div>
-      <div class="mf-photo"><img src="PUT-PHOTO-2-LINK-OR-PATH-HERE.jpg" alt=""></div>
-      <div class="mf-photo"><img src="PUT-PHOTO-3-LINK-OR-PATH-HERE.jpg" alt=""></div>
-      <div class="mf-photo"><img src="PUT-PHOTO-4-LINK-OR-PATH-HERE.jpg" alt=""></div>
+      <div class="mf-photo"><img src="rahmy.jpeg" alt=""></div>
+      <div class="mf-photo"><img src="rahmy2.jpeg" alt=""></div>
+      <div class="mf-photo"><img src="rahmy3.jpeg" alt=""></div>
+      <div class="mf-photo"><img src="rahmy5.jpeg" alt=""></div>
     </div>
 
   </div>
