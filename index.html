@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f6f4f0">
 <title>Rahmy & Mariam — Save the Date</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +34,8 @@
     max-width: 480px;
     margin: 0 auto;
     min-height: 100vh;
-    padding: 56px 28px 80px;
+    min-height: 100dvh;
+    padding: 40px 28px 60px;
     position: relative;
   }
 
@@ -54,7 +56,7 @@
     font-style: italic;
     font-weight: 500;
     font-size: clamp(24px, 6vw, 30px);
-    margin-top: 56px;
+    margin-top: 36px;
     color: var(--ink);
     opacity: 0;
     animation: fadeUp .8s ease .15s forwards;
@@ -82,28 +84,30 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    gap: 18px;
-    margin-top: 46px;
+    gap: 12px;
+    margin-top: 28px;
     opacity: 0;
     animation: fadeUp .8s ease .45s forwards;
   }
   .date-row .rule{
     height: 1px;
-    width: 46px;
+    width: 32px;
+    flex: 0 0 auto;
     background: var(--line);
   }
   .date-row .date{
     font-family: 'Alegreya', serif;
     font-style: italic;
-    font-size: 20px;
-    letter-spacing: .3em;
+    font-size: clamp(15px, 4.4vw, 20px);
+    letter-spacing: .16em;
+    white-space: nowrap;
     color: var(--ink-soft);
   }
 
   .cta-wrap{
     display:flex;
     justify-content:center;
-    margin-top: 40px;
+    margin-top: 26px;
     opacity: 0;
     animation: fadeUp .8s ease .6s forwards;
   }
@@ -131,7 +135,7 @@
 
   .photos{
     position: relative;
-    margin-top: 72px;
+    margin-top: 44px;
     height: 340px;
     opacity: 0;
     animation: fadeUp .9s ease .78s forwards;
@@ -231,24 +235,23 @@
   }
 
   .std-photo{
-    width: 78%;
-    max-width: 300px;
-    aspect-ratio: 3 / 3.6;
-    margin: 52px auto 44px;
-    border-radius: 18px;
-    overflow: hidden;
+    width: 84%;
+    max-width: 320px;
+    margin: 24px auto 32px;
+    border-radius: 0;
+    overflow: visible;
     position: relative;
-    background: #ece8e0;
+    background: transparent;
   }
   .std-photo img{
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     display: block;
     transition: transform .5s ease;
   }
   .std-photo:hover img{
-    transform: scale(1.06);
+    transform: scale(1.04);
   }
 
   .std-rule{
@@ -283,6 +286,7 @@
   .venue{
     position: relative;
     min-height: 100vh;
+    min-height: 100dvh;
     width: 100%;
     background-color: #111;
     background-size: cover;
@@ -692,6 +696,45 @@
     letter-spacing: .05em;
     color: rgba(246,244,240,.35);
   }
+
+  /* ===== mobile tuning ===== */
+  @media (max-width: 480px){
+    .std{ padding: 64px 24px 72px; }
+    .venue-inner{ padding: 0 24px 44px; }
+    .cd{ padding: 72px 24px 80px; }
+    .mf{ padding: 64px 24px 72px; }
+    .msg{ padding: 72px 24px 80px; }
+    .ftr{ padding: 56px 24px 32px; }
+
+    .std-head .l1{ letter-spacing: .14em; padding-inline-start: .14em; }
+    .std-names{ letter-spacing: .16em; font-size: 18px; }
+    .std-date{ letter-spacing: .22em; font-size: 14px; }
+
+    .venue-label{ letter-spacing: .2em; }
+    .venue-value{ font-size: 19px; }
+    .venue-cta{ letter-spacing: .16em; font-size: 12px; padding: 14px 22px; }
+
+    .cd-eyebrow{ letter-spacing: .22em; }
+    .cd-label{ letter-spacing: .12em; font-size: 10px; }
+    .cd-grid{ gap: 8px; }
+
+    .mf-sub{ max-width: none; }
+    .mf-grid{ gap: 10px; }
+
+    .msg-eyebrow{ letter-spacing: .22em; }
+    .msg-field label{ letter-spacing: .14em; }
+
+    .ftr-title{ letter-spacing: .2em; }
+    .ftr-title:hover{ letter-spacing: .24em; }
+    .ftr-date{ letter-spacing: .08em; font-size: 12px; }
+  }
+
+  @media (max-width: 360px){
+    .page{ padding-left: 20px; padding-right: 20px; }
+    .std,.venue-inner,.cd,.mf,.msg,.ftr{ padding-left: 20px; padding-right: 20px; }
+    .cd-grid{ gap: 4px; }
+    .std-names{ letter-spacing: .1em; font-size: 16px; }
+  }
 </style>
 </head>
 <body>
@@ -720,26 +763,13 @@
   </div>
 
   <script>
-    function downloadICS(){
-      const start = '20261005T180000';
-      const end   = '20261005T230000';
-      const ics = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'BEGIN:VEVENT',
-        'SUMMARY:Rahmy & Mariam\'s Wedding',
-        'LOCATION:The Roman Hall, Maryland',
-        'DESCRIPTION:We can\'t wait to celebrate with you.',
-        'DTSTART:' + start,
-        'DTEND:' + end,
-        'END:VEVENT',
-        'END:VCALENDAR'
-      ].join('\r\n');
+    // حط اسم ملف الصورة اللي هتضيفها هنا (لازم يكون في نفس فولدر الصفحة)
+    const SAVE_THE_DATE_IMAGE = 'save-the-date.jpg';
 
-      const blob = new Blob([ics], { type: 'text/calendar' });
+    function downloadICS(){
       const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'rahmy-mariam-wedding.ics';
+      link.href = SAVE_THE_DATE_IMAGE;
+      link.download = 'Rahmy-Mariam-Save-the-Date.jpg';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
